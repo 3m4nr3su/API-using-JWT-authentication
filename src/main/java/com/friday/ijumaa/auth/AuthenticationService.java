@@ -42,8 +42,8 @@ public class AuthenticationService {
 				);
 		var user = repository.findByEmail(request.getEmail()).orElseThrow();
 		var jwtToken = jwtService.generateToken(user);
-		var refreshToken = refreshTokenService.findByToken(request.getRefreshtoken());
-		return AuthenticationResponse.builder().token(jwtToken).refreshtoken(refreshToken.get().getToken()).build();
+		var refreshToken = request.getRefreshtoken();
+		return AuthenticationResponse.builder().token(jwtToken).refreshtoken(refreshToken).build();
 	}
 
 
